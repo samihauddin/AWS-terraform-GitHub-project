@@ -1,4 +1,12 @@
-### Terraform
+### What is Terraform?
+
+Terraform is an open source tool that allows you to define and manage infrastructure as code.
+
+Terraform simplifies previously manually completed tasks, by allowing you to write a script that describes the infrastructure you need using a straight forward readable language.
+
+Once the script is written, using a few commands terraform will be able to create and configure resources for you across various cloud providers.
+
+
 
 ### Using Terraform to launch an EC2 Instance
 
@@ -126,22 +134,11 @@ Your token is now ready to use.
 ```
 terraform {
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.0"
-    }
     github = {
       source  = "integrations/github"
       version = "~> 5.0"
     }
   }
-}
-
-# Configure the AWS Provider
-
-provider "aws" {
-  region  = "ap-south-1"
-  profile = "terraformprofile"
 }
 
 # Configure the GitHub Provider and provide token details
