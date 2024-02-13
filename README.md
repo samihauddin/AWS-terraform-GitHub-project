@@ -180,3 +180,83 @@ Step 10: Apply changes <br>
 ![Alt txt](images/code.png)
 
 ### Using Terraform to create a S3 Buckets
+
+### Prerequisites:
+
+1. Install Terraform:
+- Download and install Terraform from the official website.
+- Add the Terraform binary to your system's PATH.
+
+2. AWS Account:
+- Set up your AWS console
+- Create an environment variable in windows. Use the link for a guide: https://kb.wisc.edu/cae/page.php?id=24500
+
+**Step 1:** Create a new directory `s3-tf`
+
+Inside the directory create two terraform files:<br>
+
+`provider.tf` (this will specify the provider) `main.tf`(this will specify the resource to be created)
+
+![Alt txt](images/file.png)
+
+**Step 2:** Configure the provider.tf file 
+
+Navigate to Terraform: https://registry.terraform.io/providers/hashicorp/aws/latest
+
+Select `use provider`
+
+![Alt txt](images/provider.png)
+
+Copy and paste the code provided but specify the region you would like to use. 
+
+```
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.36.0"
+    }
+  }
+}
+
+provider "aws" {
+  # Configuration options
+  region="eu-west-1"
+}
+```
+**Step 3:** Initialise Terraform in the terminal 
+
+`Terraform init`
+
+**Step 4:** Configure the main.tf file using the code:
+
+```
+resource "aws_s3_bucket" "example" {
+  bucket = "samiha195634"
+
+  tags = {
+    Name        = "samiha bucket"
+    Environment = "Dev"
+  }
+}
+```
+
+**Step 5:** Plan your Infrastructure <br>
+
+`terraform plan`
+
+**Step 6:** Apply changes <br>
+
+`terraform apply`
+
+**If you navigate to AWS S3, you will see that a bucket has been created.** 
+
+**Expected output**
+
+![Alt txt](images/bucket1.png)
+
+**Delete resources created <br>**
+
+`terraform destroy`, then confirm 'destroy'. This will delete the S3 bucket that was created. 
+
+![Alt txt](images/buck.png)
