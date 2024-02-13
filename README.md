@@ -89,6 +89,94 @@ resource "aws_instance" "samiha-tf" {
 - Set up your AWS console
 - Create an environment variable in windows. Use the link for a guide: https://kb.wisc.edu/cae/page.php?id=24500
 
-Step 1: 
+**Step 1:** Generate API token on GitHub
+
+- Navigate to `settings`
+- Select `Developer settings`
+- Then select `Personal access tokens`
+- Select `Fine-grained tokens`
+- Select `Generate new token`
+
+![Alt txt](images/token.png)
+
+**Step 2:** Name the token and give an expiration date
+
+![Alt txt](images/token1.png)
+
+**Step 3:** select repository access as ‘All repositories’
+
+![Alt txt](images/token2.png)
+
+**Step 4:** Select Repository permissions →Administration →Read and Write
+
+![Alt txt](images/token3.png)
+
+**Step 5:** Then click on ‘Generate Token’
+
+Your token is now ready to use. 
+
+![Alt txt](images/token4.png)
+
+**Step 6:** Create a new folder `git-repo-tf`, inside this create a `github.tf` file.
+
+![Alt txt](images/git.png)
+
+**Step 7:** inside the github.tf write the code as below and insert the token that was created into the code.  
+
+```
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+    github = {
+      source  = "integrations/github"
+      version = "~> 5.0"
+    }
+  }
+}
+
+# Configure the AWS Provider
+
+provider "aws" {
+  region  = "ap-south-1"
+  profile = "terraformprofile"
+}
+
+# Configure the GitHub Provider and provide token details
+
+provider "github" {
+  token = "insert API token created here"
+}
+
+# repository details
+
+resource "github_repository" "example" {
+  name        = "example"
+  description = "My awesome codebase"
+
+  visibility = "public"
+}
+
+```
+
+**Step 8:** Initialise Terraform 
+
+`terraform init`
+
+**Step 9:** Plan your Infrastructure <br>
+
+`terraform plan`
+
+Step 10: Apply changes <br>
+
+`terraform apply`
+
+**If you navigate to GitHub, you will see that a repository has been created.** 
+
+**Expected output**
+
+![Alt txt](images/code.png)
 
 ### Using Terraform to create a S3 Buckets
