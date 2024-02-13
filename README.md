@@ -91,4 +91,4 @@ resource "aws_instance" "samiha-tf" {
 
 Step 1: 
 
-### Using Terraform to create a S3 Bucket 
+### Using Terraform to create a S3 Buckets
