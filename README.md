@@ -6,6 +6,9 @@ Terraform simplifies previously manually completed tasks, by allowing you to wri
 
 Once the script is written, using a few commands terraform will be able to create and configure resources for you across various cloud providers.
 
+### Architecture
+
+![Alt txt](images/diagram.png)
 
 
 ### Using Terraform to launch an EC2 Instance
